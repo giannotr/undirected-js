@@ -57,5 +57,8 @@
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest"
 		}
+	},
+	"dependencies": {
+		"type-insurance": "^1.2.0"
 	}
 }
