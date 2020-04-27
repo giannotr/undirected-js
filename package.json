@@ -1,0 +1,61 @@
+{
+	"name": "undirected",
+	"version": "0.0.1",
+	"description": "JavaScript implementation of undirected graphs through adjacency lists",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/giannotr/undirected-js.git"
+	},
+	"keywords": [
+		"undirected",
+		"graphs",
+		"graph",
+		"theory",
+		"network",
+		"path",
+		"algorithm"
+	],
+	"author": "Ruben Giannotti",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/giannotr/undirected-js/issues"
+	},
+	"homepage": "https://github.com/giannotr/undirected-js#readme",
+	"scripts": {
+		"build": "tsc",
+		"prepare": "npm run build",
+		"test": "jest --coverage",
+		"test-dev": "xo && npm run test && npm run prepare"
+	},
+	"devDependencies": {
+		"coveralls": "^3.1.0",
+		"jest": "^25.4.0",
+		"ts-jest": "^25.4.0",
+		"typescript": "^3.8.3",
+		"xo": "^0.30.0"
+	},
+	"xo": {
+		"ignores": [
+			"./src/**/*.test.js"
+		]
+	},
+	"jest": {
+		"testPathIgnorePatterns": [
+			"/node_modules/",
+			"/coverage/",
+			"/lib/"
+		],
+		"roots": [
+			"<rootDir>/src"
+		],
+		"testMatch": [
+			"**/__tests__/**/*.+(ts|tsx|js)",
+			"**/?(*.)+(spec|test).+(ts|tsx|js)"
+		],
+		"transform": {
+			"^.+\\.(ts|tsx)$": "ts-jest"
+		}
+	}
+}
