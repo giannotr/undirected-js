@@ -59,6 +59,6 @@
 		}
 	},
 	"dependencies": {
-		"type-insurance": "^1.2.0"
+		"type-insurance": "^1.2.3"
 	}
 }
