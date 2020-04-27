@@ -1,5 +1,6 @@
 import TypeInsurance from 'type-insurance';
 
+// TODO: check Map<...>
 type Tuple = readonly [string, string];
 type Nodes = string | readonly string[];
 type Edges = Tuple | readonly Tuple[];
@@ -10,11 +11,16 @@ type LookupResult = [number, string[]] | undefined;
 export default class Undirected {
 	public graph: AdjacencyList;
 
-	constructor(nodes: Nodes, edges: Edges) {
+	constructor(nodes?: Nodes, edges?: Edges) {
 		this.graph = new Map();
 
-		this.addNodes(nodes);
-		this.addEdges(edges);
+		if(nodes) {
+			this.addNodes(nodes);
+		}
+
+		if(edges) {
+			this.addEdges(edges);
+		}
 	}
 
 	addNodes(keys: Nodes) {
@@ -26,8 +32,13 @@ export default class Undirected {
 		const matrix = (new TypeInsurance(pairs)).array;
 		matrix.forEach((pair: Tuple) => {
 			const [key1, key2] = pair;
-			this.graph.get(key1).push(key2);
-			this.graph.get(key2).push(key1);
+			const value1 = this.graph.get(key1);
+			const value2 = this.graph.get(key2);
+
+			if(value1 && value2) {
+				value1.push(key1);
+				value2.push(key1);
+			}
 		});
 	}
 
