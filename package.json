@@ -37,6 +37,15 @@
 		"xo": "^0.30.0"
 	},
 	"xo": {
+		"rules": {
+			"comma-dangle": "off",
+			"object-curly-spacing": "off",
+			"@typescript-eslint/keyword-spacing": "off",
+			"@typescript-eslint/brace-style": "warn",
+			"@typescript-eslint/restrict-plus-operands": "warn",
+			"@typescript-eslint/semi": "warn",
+			"@typescript-eslint/prefer-readonly-parameter-types": "warn"
+		},
 		"ignores": [
 			"./src/**/*.test.js"
 		]
