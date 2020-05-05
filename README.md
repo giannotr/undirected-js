@@ -2,16 +2,17 @@
 
 > JavaScript implementation of undirected graphs through adjacency lists
 
-Refined and robust implementation with types of:
+This package is mainly a refined and robust implementation with types of:
+
 https://www.geeksforgeeks.org/implementation-graph-javascript/
 
-https://www.npmjs.com/package/graphology
-https://www.npmjs.com/package/graphlib
-https://github.com/dagrejs/graphlib/wiki
-https://www.npmjs.com/package/graphlibrary
-https://github.com/dagrejs/graphlib/wiki
-https://www.npmjs.com/package/undirected-graph
-https://www.npmjs.com/package/graph
+It is meant to provide an easy and accessible ("out-of-the-box") work flow and to be minimal.
+
+While there is an array of existing solutions for the given task, they all seem to "fail" for specific reasons - considering the targeted usage paradigm:
+
+- [graphology](https://www.npmjs.com/package/graphology) as a whole specification is over scoped.
+- [graphlib](https://www.npmjs.com/package/graphlib) as a complete solution for either directed and undirected graphs with tons of admittedly elaborate features is far away from being minimal.
+- Then there are a few packages who look not taken care of a lot and/or abandoned: graphlibrary (a fork from graphlib), undirected-graph, graph.
 
 ## Usage
 
