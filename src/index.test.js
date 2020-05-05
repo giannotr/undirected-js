@@ -21,29 +21,29 @@ test('non-empty graph', () => {
 
 	expect(friendsNetwork.graph).toEqual(new Map([
 		[
-			"Alice", [
-				"Bob",
-				"John",
-				"Jane",
+			'Alice', [
+				'Bob',
+				'John',
+				'Jane',
 			]
 		],
 		[
-			"Bob", [
-				"Alice",
-				"John",
+			'Bob', [
+				'Alice',
+				'John',
 			]
 		],
 		[
-			"Jane", [
-				"John",
-				"Alice",
+			'Jane', [
+				'John',
+				'Alice',
 			]
 		],
 		[
-			"John", [
-				"Bob",
-				"Alice",
-				"Jane",
+			'John', [
+				'Bob',
+				'Alice',
+				'Jane',
 			]
 		],
 	]));
@@ -70,8 +70,8 @@ test('unconnected nodes', () => {
 	friendsNetwork.addNodes(people);
 	friendsNetwork.addEdges(friendship);
 
-	expect(friendsNetwork.bfs('Bob', 'Jane')).toEqual(undefined);
-	expect(friendsNetwork.dfs('Alice', 'Bob')).toEqual(undefined);
+	expect(friendsNetwork.bfs('Bob', 'Jane')).toBe(undefined);
+	expect(friendsNetwork.dfs('Alice', 'Bob')).toBe(undefined);
 });
 
 test('search with unknown start node', () => {
@@ -84,8 +84,8 @@ test('search with unknown start node', () => {
 	friendsNetwork.addNodes(people);
 	friendsNetwork.addEdges(friendship);
 
-	expect(friendsNetwork.bfs('Alice', 'Christina')).toEqual(undefined);
-	expect(friendsNetwork.dfs('Bob', 'Christina')).toEqual(undefined);
+	expect(friendsNetwork.bfs('Alice', 'Christina')).toBe(undefined);
+	expect(friendsNetwork.dfs('Bob', 'Christina')).toBe(undefined);
 });
 
 test('initialize graph with values', () => {
@@ -95,6 +95,31 @@ test('initialize graph with values', () => {
 });
 
 test('remove nodes', () => {
+	const minimalNetwork = new Undirected('A');
+	const network = new Undirected(['A', 'B', 'C'], [
+		['A', 'B'],
+		['A', 'C'],
+		['B', 'C'],
+	]);
+
+	expect(minimalNetwork.graph).toEqual(new Map([['A', []]]));
+	expect(network.graph).toEqual(new Map([
+		['A', ['B', 'C']],
+		['B', ['A', 'C']],
+		['C', ['A', 'B']],
+	]));
+
+	minimalNetwork.removeNodes(['A']);
+	network.removeNodes(['C']);
+
+	expect(minimalNetwork.graph).toEqual(new Map());
+	expect(network.graph).toEqual(new Map([
+		['A', ['B']],
+		['B', ['A']],
+	]));
+});
+
+test('remove edges', () => {
 	const people = ['Alice', 'Bob'];
 
 	const smallNetwork = new Undirected(people, [people]);
@@ -102,10 +127,12 @@ test('remove nodes', () => {
 	expect(smallNetwork.graph).toEqual(new Map([
 		['Alice', ['Bob']], ['Bob', ['Alice']]
 	]));
+	expect(smallNetwork.bfs('Alice', 'Bob')).toEqual([1, ['Bob', 'Alice']]);
 
 	smallNetwork.removeEdges([people]);
 
 	expect(smallNetwork.graph).toEqual(new Map([
 		['Alice', []], ['Bob', []]
 	]));
+	expect(smallNetwork.bfs('Alice', 'Bob')).toBe(undefined);
 });

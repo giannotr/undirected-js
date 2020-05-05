@@ -32,12 +32,6 @@ export default class Undirected {
 		array.forEach((key: string) => this.graph.set(key, []));
 	}
 
-	/* Remove nodes method
-	removeNodes(keys: Nodes) {
-		const { array } = new TypeInsurance(keys);
-	}
-	*/
-
 	addEdges(pairs: Edges) {
 		const { graph } = this;
 
@@ -50,6 +44,19 @@ export default class Undirected {
 				value1.push(key2);
 				value2.push(key1);
 			}
+		});
+	}
+
+	removeNodes(keys: Nodes) {
+		const { array } = new TypeInsurance(keys);
+		const { graph } = this;
+
+		array.forEach((_key: string) => {
+			graph.forEach((value, key, map) => {
+				map.set(key, value.filter(item => item !== _key));
+			});
+
+			graph.delete(_key);
 		});
 	}
 
@@ -121,8 +128,7 @@ export default class Undirected {
 			checked = memory.checked;
 			steps = memory.steps;
 			path = memory.path;
-		}
-		else {
+		} else {
 			checked = new Set();
 			steps = 0;
 			path = [start];
