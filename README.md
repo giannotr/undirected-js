@@ -46,8 +46,8 @@ console.log(graph.bfs('Alice', 'Jane'));
 console.log(graph.dfs('Alice', 'Solomon'));
 
 // Remove nodes or connections
-graph.addNodes('John');
-graph.addEdges(['Jane', 'Alice']);
+graph.removeNodes('John');
+graph.removeEdges(['Jane', 'Alice']);
 
 console.log(graph);
 ```
