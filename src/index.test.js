@@ -60,7 +60,7 @@ test('non-empty graph', () => {
 		.toEqual([1, ['Bob', 'Alice']]);
 });
 
-test('unconnected nodes', () => {
+test('lookup on unconnected nodes', () => {
 	const people = ['Alice', 'Bob', 'John', 'Jane'];
 	const friendship = [
 		['Alice', 'Jane'],
@@ -74,7 +74,7 @@ test('unconnected nodes', () => {
 	expect(friendsNetwork.dfs('Alice', 'Bob')).toBe(undefined);
 });
 
-test('search with unknown start node', () => {
+test('lookup with unknown start node', () => {
 	const people = ['Alice', 'Bob', 'John', 'Jane'];
 	const friendship = [
 		['Alice', 'Jane'],
@@ -88,7 +88,7 @@ test('search with unknown start node', () => {
 	expect(friendsNetwork.dfs('Bob', 'Christina')).toBe(undefined);
 });
 
-test('initialize graph with values', () => {
+test('initialize graph constructor with values', () => {
 	const example = new Undirected('A', [['A', 'A']]);
 
 	expect(example.graph).toEqual(new Map([['A', ['A', 'A']]]));
@@ -135,4 +135,43 @@ test('remove edges', () => {
 		['Alice', []], ['Bob', []]
 	]));
 	expect(smallNetwork.bfs('Alice', 'Bob')).toBe(undefined);
+});
+
+test('add edges with unregistered nodes', () => {
+	const couple = ['John', 'Jane'];
+
+	const coupleNetwork = new Undirected(couple, [couple]);
+
+	coupleNetwork.addEdges([['Jane', 'Alice']]);
+
+	expect(coupleNetwork.graph).toEqual(new Map([
+		['John', ['Jane']], ['Jane', ['John']],
+	]));
+	expect(coupleNetwork.bfs('Jane', 'John')).toEqual([1, ['John', 'Jane']]);
+	expect(coupleNetwork.bfs('Jane', 'Alice')).toBe(undefined);
+});
+
+test('remove edges with unregistered nodes', () => {
+	const groupNetwork = new Undirected();
+
+	const group = ['Alice', 'Jane', 'Christina'];
+	const groupConnections = [
+		['Alice', 'Christina'],
+		['Jane', 'Alice'],
+	];
+
+	groupNetwork.addNodes(group);
+	groupNetwork.addEdges(groupConnections);
+
+	const expected = new Map([
+		['Alice', ['Christina', 'Jane']],
+		['Christina', ['Alice']],
+		['Jane', ['Alice']],
+	]);
+
+	expect(groupNetwork.graph).toEqual(expected);
+
+	groupNetwork.removeEdges([['Alice', 'Bob']]);
+
+	expect(groupNetwork.graph).toEqual(expected);
 });

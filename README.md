@@ -17,6 +17,8 @@ While there is an array of existing solutions for the given task, they all seem 
 ## Usage
 
 ```js
+import Undirected from 'undirected';
+
 const graph = new Undirected();
 
 // Or just
