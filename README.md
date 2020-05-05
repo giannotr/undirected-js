@@ -12,7 +12,7 @@ While there is an array of existing solutions for the given task, they all seem 
 
 - [graphology](https://www.npmjs.com/package/graphology) as a whole specification is over scoped.
 - [graphlib](https://www.npmjs.com/package/graphlib) as a complete solution for either directed and undirected graphs with tons of admittedly elaborate features is far away from being minimal.
-- Then there are a few packages who look not taken care of a lot and/or abandoned: graphlibrary (a fork from graphlib), undirected-graph, graph.
+- Then there are a few packages who look not taken care of a lot and/or abandoned: [graphlibrary](https://www.npmjs.com/package/graphlibrary) (a fork from graphlib), [undirected-graph](https://www.npmjs.com/package/undirected-graph), [graph](https://www.npmjs.com/package/graph).
 
 ## Usage
 
@@ -44,6 +44,12 @@ graph.addEdges(['Solomon', 'Bob']);
 // Perform lookups
 console.log(graph.bfs('Alice', 'Jane'));
 console.log(graph.dfs('Alice', 'Solomon'));
+
+// Remove nodes or connections
+graph.addNodes('John');
+graph.addEdges(['Jane', 'Alice']);
+
+console.log(graph);
 ```
 
 ## API
