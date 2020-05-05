@@ -15,7 +15,9 @@
 		"theory",
 		"network",
 		"path",
-		"algorithm"
+		"algorithm",
+		"data",
+		"structures"
 	],
 	"author": "Ruben Giannotti",
 	"license": "MIT",

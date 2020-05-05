@@ -6,6 +6,11 @@ type Edges = Tuple | readonly Tuple[];
 type AdjacencyList = Map<string, string[]>;
 type LookupCallback = (x: string, y: number) => any;
 type LookupResult = [number, string[]] | undefined;
+type DfsParams = {
+	checked: Set<string>;
+	steps: number;
+	path: string[];
+}
 
 export default class Undirected {
 	public graph: AdjacencyList;
@@ -106,10 +111,23 @@ export default class Undirected {
 		search: string,
 		start: string,
 		callback?: LookupCallback,
-		checked = new Set(),
-		steps = 0,
-		path = [start],
+		memory?: DfsParams,
 	): LookupResult {
+		let checked: Set<string>;
+		let steps: number;
+		let path: string[];
+
+		if(memory) {
+			checked = memory.checked;
+			steps = memory.steps;
+			path = memory.path;
+		}
+		else {
+			checked = new Set();
+			steps = 0;
+			path = [start];
+		}
+
 		checked.add(start);
 
 		const _nodes = this.graph.get(start) ?? [];
@@ -128,7 +146,7 @@ export default class Undirected {
 			}
 
 			if(!checked.has(node)) {
-				return this.dfs(search, node, callback, checked, steps + 1, path);
+				return this.dfs(search, node, callback, { checked, steps: steps + 1, path });
 			}
 		}
 

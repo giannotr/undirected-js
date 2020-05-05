@@ -1,5 +1,6 @@
-# undirected-js
-JavaScript implementation of undirected graphs through adjacency lists
+# UndirectedJS
+
+> JavaScript implementation of undirected graphs through adjacency lists
 
 Refined and robust implementation with types of:
 https://www.geeksforgeeks.org/implementation-graph-javascript/
@@ -44,3 +45,68 @@ console.log(graph.bfs('Alice', 'Jane'));
 console.log(graph.dfs('Alice', 'Solomon'));
 ```
 
+## API
+
+### Constructor: `new Undirected(nodes?: Nodes, edges?: Edges)`
+
+Creates a new instance of an undirected graph from the given `nodes` and `edges`. Both can be given as implicit singletons (a single string for a node or an array of two strings for an edge) or an array of strings for the nodes or a list of arrays for the edges. Specifically, the edges are passed as a list of connections beetwen any two edges, i.e. `['nodeA', 'nodeB']` (or `[['node1', 'node2'], ...]`).
+
+### Properties
+
+#### .graph
+
+Returns the (current) `Map` representation of the undirected graph, i.e. the adjacency list.
+
+### Methods
+
+#### addNodes
+
+▸ **addNodes**(`keys`: Nodes)
+
+Add a node or a set of nodes to the graph.
+
+#### addEdges
+
+▸ **addEdges**(`pairs`: Edges)
+
+Add an edge or a set of edges to the graph.
+
+#### bfs
+
+▸ **bfs**(`search`: string, `start`: string, `callback?`: LookupCallback): LookupResult
+
+Performs a breadth-first search. If the lookup is successful, the callback is invoked with the `search` and path length (from `start` to `search`) and an array containing the path length and the path is returned. Otherwise the method returns `undefined`.
+
+#### dfs
+
+▸ **dfs**(`search`: string, `start`: string, `callback?`: LookupCallback): LookupResult
+
+Performs a depth-first search. If the lookup is successful, the callback is invoked with the `search` and path length (from `start` to `search`) and an array containing the path length and the path is returned. Otherwise the method returns `undefined`.
+
+## Keywords
+
+- undirected
+- graphs
+- graph
+- theory
+- network
+- path
+- algorithm
+- data
+- structures
+
+## Dependencies
+
+- [type-insurance](https://www.npmjs.com/package/type-insurance)
+
+## Related
+
+- [graphology](https://www.npmjs.com/package/graphology) - a specification for a robust & multipurpose JavaScript Graph object
+- [graphlib](https://www.npmjs.com/package/graphlib) - Graphlib is a JavaScript library that provides data structures for undirected and directed multi-graphs
+- [graphlibrary](https://www.npmjs.com/package/graphlibrary) - based on dagrejs/graphlib (see above)
+- [undirected-graph](https://www.npmjs.com/package/undirected-graph) - Graph data structure with basic functionality
+- [graph](https://www.npmjs.com/package/graph) - a simple Javascript library for manipulating directed and undirected graphs
+
+## Maintainer
+
+- Ruben Giannotti - ruben.giannotti@gmx.net - github.com/giannotr
