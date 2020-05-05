@@ -93,3 +93,19 @@ test('initialize graph with values', () => {
 
 	expect(example.graph).toEqual(new Map([['A', ['A', 'A']]]));
 });
+
+test('remove nodes', () => {
+	const people = ['Alice', 'Bob'];
+
+	const smallNetwork = new Undirected(people, [people]);
+
+	expect(smallNetwork.graph).toEqual(new Map([
+		['Alice', ['Bob']], ['Bob', ['Alice']]
+	]));
+
+	smallNetwork.removeEdges([people]);
+
+	expect(smallNetwork.graph).toEqual(new Map([
+		['Alice', []], ['Bob', []]
+	]));
+});

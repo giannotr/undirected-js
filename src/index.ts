@@ -2,11 +2,11 @@ import TypeInsurance from 'type-insurance';
 
 type Tuple = readonly [string, string];
 type Nodes = string | readonly string[];
-type Edges = Tuple | readonly Tuple[];
+type Edges = readonly Tuple[];
 type AdjacencyList = Map<string, string[]>;
 type LookupCallback = (x: string, y: number) => any;
 type LookupResult = [number, string[]] | undefined;
-type DfsParams = {
+type DfsMemory = {
 	checked: Set<string>;
 	steps: number;
 	path: string[];
@@ -39,11 +39,12 @@ export default class Undirected {
 	*/
 
 	addEdges(pairs: Edges) {
-		const matrix = (new TypeInsurance(pairs)).array;
-		matrix.forEach((pair: Tuple) => {
+		const { graph } = this;
+
+		pairs.forEach((pair: Tuple) => {
 			const [key1, key2] = pair;
-			const value1 = this.graph.get(key1);
-			const value2 = this.graph.get(key2);
+			const value1 = graph.get(key1);
+			const value2 = graph.get(key2);
 
 			if(value1 && value2) {
 				value1.push(key2);
@@ -52,21 +53,20 @@ export default class Undirected {
 		});
 	}
 
-	/* Remove edges method
 	removeEdges(pairs: Edges) {
-		const matrix = (new TypeInsurance(pairs)).array;
-		matrix.forEach((pair: Tuple) => {
+		const { graph } = this;
+
+		pairs.forEach((pair: Tuple) => {
 			const [key1, key2] = pair;
-			const value1 = this.graph.get(key1);
-			const value2 = this.graph.get(key2);
+			const value1 = graph.get(key1);
+			const value2 = graph.get(key2);
 
 			if(value1 && value2) {
-				//value1.push(key2);
-				//value2.push(key1);
+				graph.set(key1, value1.filter(item => item !== key2));
+				graph.set(key2, value2.filter(item => item !== key1));
 			}
 		});
 	}
-	*/
 
 	bfs(
 		search: string,
@@ -111,7 +111,7 @@ export default class Undirected {
 		search: string,
 		start: string,
 		callback?: LookupCallback,
-		memory?: DfsParams,
+		memory?: DfsMemory,
 	): LookupResult {
 		let checked: Set<string>;
 		let steps: number;

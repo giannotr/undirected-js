@@ -1,6 +1,6 @@
 {
 	"name": "undirected",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "JavaScript implementation of undirected graphs through adjacency lists",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
