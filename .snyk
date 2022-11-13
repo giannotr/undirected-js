@@ -1,0 +1,4 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.1058.0
+language-settings: 
+  typescript: "3.8.3"
